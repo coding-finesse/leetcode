@@ -1,22 +1,23 @@
 class Solution {
 public:
-    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
-		//Size of nums1 including 0's
-        int k=m+n-1;
-		
-		//Both the pointers to point at last index
-        m--;
-        n--;
-		
-        while(m>=0 && n>=0) {
-			//Comparing the values and adjusting the k value accordingly
-            if(nums1[m]>nums2[n]) nums1[k--]=nums1[m--];
-            else nums1[k--]=nums2[n--];
+    void merge(vector<int>& A, int m, vector<int>& B, int n) {
+		  int a=m-1;
+        int b=n-1;
+        int i=m+n-1;    // calculate the index of the last element of the merged array
+        
+        // go from the back by A and B and compare and put to the A element which is larger
+        while(a>=0 && b>=0){
+            
+            if(A[a]>B[b]){
+                
+                A[i--]=A[a--];}
+            else{
+                
+                A[i--]=B[b--];}
         }
-		
-		//It might happen that elements of second array are smaller than smallest element of first array
-        while(n>=0) nums1[k--]=nums2[n--];
-		
-		//We need not cover the otherwise case of first array elements begin smaller, because they are already in first half of the array
+        
+        // if B is longer than A just copy the rest of B to A location, otherwise no need to do anything
+        while(b>=0){
+            A[i--]=B[b--];}
     }
 };
